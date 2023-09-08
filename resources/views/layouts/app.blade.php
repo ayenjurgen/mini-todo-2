@@ -30,10 +30,11 @@
     
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        {{-- <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ route ('todos.index') }}">
                     To-Do App
@@ -85,7 +86,54 @@
                     </ul>
                 </div>
             </div>
-        </nav>
+        </nav> --}}
+
+        <div class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+            <div class="container-fluid d-flex justify-content-between align-items-center">
+                <a href="{{ route ('todos.index') }}" style="text-decoration: none; margin-left: 10px;">
+                    <h1 style="color:#1B00FF;">To-Do</h1>
+                </a>
+                <button class="navbar-toggler menu" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="login-menu collapse navbar-collapse"  id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto"></ul>
+                    <ul class="navbar-nav ms-auto">
+                        @guest
+                            @if (Route::has('login'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('login') }}" style="color:#1B00FF; margin-left: 20px;">{{ __('Login') }}</a>
+                                </li>
+                            @endif
+    
+                            @if (Route::has('register'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('register') }}" style="color:#1B00FF; margin-left: 20px;">{{ __('Register') }}</a>
+                                </li>
+                            @endif
+                        @else
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ Auth::user()->name }}
+                                </a>
+    
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+    
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>
+                        @endguest
+                    </ul>
+                </div>
+            </div>
+        </div>
 
         <main class="py-4">
             @yield('content')
