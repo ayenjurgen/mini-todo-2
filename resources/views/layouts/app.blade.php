@@ -91,7 +91,7 @@
         <div class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container-fluid d-flex justify-content-between align-items-center">
                 <a href="{{ route ('todos.index') }}" style="text-decoration: none; margin-left: 10px;">
-                    <h1 style="color:#1B00FF;">To-Do</h1>
+                    <h1 style="color:#1B00FF; margin: 0px;">To-Do</h1>
                 </a>
                 <button class="navbar-toggler menu" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -117,10 +117,10 @@
                                     {{ Auth::user()->name }}
                                 </a>
     
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown" style="margin-top: 10px; margin-right: -10px;">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                                     document.getElementById('logout-form').submit();" style="font-size: 16px; text-align: center;">
                                         {{ __('Logout') }}
                                     </a>
     
