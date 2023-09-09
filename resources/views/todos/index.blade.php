@@ -1,17 +1,5 @@
 @extends('layouts.app')
 
-<style>
-#outer
-{
-    width: auto;
-    text-align: center;
-}
-.inner
-{
-    display: inline-block;
-}
-</style>
-
 @section('content')
     {{-- <div class="container">
         <div class="row justify-content-center">
@@ -89,9 +77,9 @@
         </div>
     </div> --}}
 
-    <div class="col">
+    <div class="col todolist">
         <div class="card card-box">
-            <div class="card-header"><h3 style="margin: 0px;">{{ __('My To-Do List') }}</h3></div>
+            <div class="card-header"><h5 style="margin: 0px;">{{ __('My To-Do List') }}</h5></div>
             <div class="card-body">
                 @if (Session::has('alert-success'))
                     <div class="alert alert-success" role="alert">
@@ -105,7 +93,7 @@
                     </div>
                 @endif
 
-                <a href="{{ route('todos.create') }}" class="btn btn-primary" style="margin: 20px 0px;">Add</a>
+                <a href="{{ route('todos.create') }}" class="btn btn-primary" style="margin: 20px 0px;"><i class="icon-copy bi bi-plus"></i> Create</a>
 
                 @if (Session::has('alert-info'))
                     <div class="alert alert-info" role="alert">
@@ -118,26 +106,26 @@
                         <table class="data-table table nowrap">
                             <thead>
                                 <tr>
+                                    <th>Status</th>
                                     <th class="table-plus">Title</th>
                                     <th class="datatable-nosort">Description</th>
-                                    <th class="datatable-nosort">Status</th>
                                     <th class="datatable-nosort">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($todos as $todo)
                                     <tr>
+                                        <td>
+                                            @if ($todo->is_completed == 1 )
+                                                <a class="btn btn-sm btn-success" id="status" style="color: white;">Finished</a>
+                                            @else
+                                                <a class="btn btn-sm btn-danger" id="status" style="color: white;">Unfinished</a>
+                                            @endif
+                                        </td>
                                         <td class="table-plus">
                                             <div class="weight-600">{{ $todo->title}}</div>
                                         </td>
                                         <td>{{ $todo->description}}</td>
-                                        <td>
-                                            @if ($todo->is_completed == 1 )
-                                                <a class="btn btn-sm btn-success" href="">Finished</a>
-                                            @else
-                                                <a class="btn btn-sm btn-danger" href="">Unfinished</a>
-                                            @endif
-                                        </td>
                                         <td id="outer">
                                             <a class="inner btn btn-sm btn-primary" href="{{ route('todos.edit', $todo->id) }}"><i class="dw dw-edit2"></i> Edit</a>
                                             <a class="inner btn btn-sm btn-success" href="{{ route('todos.show', $todo->id) }}"><i class="dw dw-eye"></i> View</a>

@@ -38,8 +38,8 @@
                     <label for="">Status</label>
                     <select name="is_completed" class="form-control">
                         <option disabled selected>Select Option</option>
-                        <option value="1">Completed</option>
-                        <option value="0">Not Completed</option>
+                        <option value="1">Finished</option>
+                        <option value="0">Unfinished</option>
 
                     </select>
                 </div>

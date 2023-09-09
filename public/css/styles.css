@@ -15,8 +15,48 @@
     margin-top: -30px;
 }
 
-.dropdown-menu-end{
-    background: red;
+.inner{
+    display: inline-block;
+}
+
+#outer{
+    width: fit-content;
+    margin: 0;
+}
+
+.todolist, .showlist{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.todolist .card-box table{
+    text-align: center;
+    margin: 0 auto;
+    width: 80vw;
+}
+
+.todolist .card-box .card-title{
+    color: #7d70f1;
+    font-style: italic;
+}
+
+.bold{
+    color: #333;
+    font-weight: 600;
+}
+
+.showlist .card-box{
+    width: 80vw;
+}
+
+@media screen and (max-width: 912px){
+    .todolist .card-box{
+        width: 100vw;
+    }
+    .showlist .card-box{
+        width: 100vw;
+    }
 }
 
 @media screen and (max-width: 767px) {
