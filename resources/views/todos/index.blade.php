@@ -21,6 +21,62 @@
                     </div>
                     @endif
 
+<<<<<<< HEAD
+                @if (Session::has('alert-info'))
+                <div class="alert alert-info" role="alert">
+                {{ Session::get('alert-info') }}
+                </div>
+                @endif
+
+                <a class="btn btn-sm btn-info" href="{{ route('todos.create') }}">Create To-do</a>
+                
+
+                @if (count($todos) > 0)
+                <div class="table-responsive">
+	            <table class="table table-striped">
+                <thead>
+                    <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Completed</th>
+                    <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($todos as $todo)
+                        <tr>
+                            <td>{{ $todo->title}}</td>
+                            <td>{{ $todo->description}}</td>
+                            <td>
+                                @if ($todo->is_completed == 1 )
+                                    <a class="btn btn-sm btn-success" href="">Completed</a>
+                                @else
+                                    <a class="btn btn-sm btn-danger" href="">Not finish</a>
+                                @endif
+                            </td>
+                            <td id="outer">
+                                <a class="inner btn btn-sm btn-primary" href="{{ route('todos.edit', $todo->id) }}">Edit</a>
+                                <a class="inner btn btn-sm btn-success" href="{{ route('todos.show', $todo->id) }}">View</a>
+                                <form method="post" action="{{ route('todos.destroy') }}" class="inner">
+                             @csrf
+                             @method('DELETE')
+                                <input type="hidden" name="todo_id" value="{{ $todo->id }}">
+                                <input type="submit" class="btn btn-sm btn-danger" value="Delete">
+                                
+    
+                            </form>
+                            </td>
+                        </tr>
+                    @endforeach
+                    
+                </tbody>
+                </table>
+                {{ $todos->links('pagination::bootstrap-4') }}
+                @else
+                <h4>No to-dos are created yet</h4>
+                @endif
+                </div>
+=======
                     <a class="btn btn-sm btn-info" href="{{ route('todos.create') }}">Create To-do</a>
                     
                     @if (Session::has('alert-info'))
@@ -72,6 +128,7 @@
                     @endif
                     </div>
                     </div>
+>>>>>>> 94eb5ce0a8a1047b4c908872204e9102a28ee075
                 </div>
             </div>
         </div>

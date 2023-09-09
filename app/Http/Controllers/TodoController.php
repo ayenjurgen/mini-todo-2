@@ -11,10 +11,13 @@ class TodoController extends Controller
 {
     public function index()
     {
-        $todos = Todo::all();
+        $todos = Todo::paginate(15);
         return view('todos.index', [
         'todos' => $todos
         ]);
+
+        $todos = Todo::paginate(10);
+        return view('todos.index', compact('todo'));
     }
     public function create()
     {
@@ -23,7 +26,7 @@ class TodoController extends Controller
     public function store(TodoRequest $request)
     {
         // Todo::create($request->all());
-        // $request->validated();
+        $request->validated();
         Todo::create([
             'title' => $request->title,
             'description' => $request->description,
@@ -39,10 +42,10 @@ class TodoController extends Controller
     {
         $todo = Todo::find($id);
         if(! $todo){
-            request()->session()->flash('error', 'Unable to locate the to-do');
-            return to_route('todos.index')->withErrors([
-                'error' => 'Unable to locate the to-do'
-            ]);
+            // request()->session()->flash('error', 'Unable to locate the to-do');
+            // return to_route('todos.index')->withErrors([
+            //     'error' => 'Unable to locate the to-do'
+            // ]);
         }
         return view('todos.show', ['todo' => $todo]);
     }
@@ -51,10 +54,10 @@ class TodoController extends Controller
     {
         $todo = Todo::find($id);
         if(! $todo){
-            request()->session()->flash('error', 'Unable to locate the to-do');
-            return to_route('todos.index')->withErrors([
-                'error' => 'Unable to locate the to-do'
-            ]);
+            // request()->session()->flash('error', 'Unable to locate the to-do');
+            // return to_route('todos.index')->withErrors([
+            //     'error' => 'Unable to locate the to-do'
+            // ]);
         }
         return view('todos.edit', ['todo' => $todo]);
     }
@@ -63,10 +66,10 @@ class TodoController extends Controller
     {
         $todo = Todo::find($request->todo_id);
         if(! $todo){
-            request()->session()->flash('error', 'Unable to locate the to-do');
-            return to_route('todos.index')->withErrors([
-                'error' => 'Unable to locate the to-do'
-            ]);
+            // request()->session()->flash('error', 'Unable to locate the to-do');
+            // return to_route('todos.index')->withErrors([
+            //     'error' => 'Unable to locate the to-do'
+            // ]);
     }
 
     $todo->update([
@@ -75,6 +78,7 @@ class TodoController extends Controller
         'is_completed' => $request->is_completed
     ]);
     request()->session()->flash('alert-info', 'Updated Successful');
+
     return to_route('todos.index');
 
 
@@ -84,13 +88,14 @@ public function destroy(Request $request)
 {
     $todo = Todo::find($request->todo_id);
         if(! $todo){
-            request()->session()->flash('error', 'Unable to locate the to-do');
-            return to_route('todos.index')->withErrors([
-                'error' => 'Unable to locate the to-do'
-            ]);
+            // request()->session()->flash('error', 'Unable to locate the to-do');
+            // return to_route('todos.index')->withErrors([
+            //     'error' => 'Unable to locate the to-do'
+            // ]);
 }
 $todo->delete();
 request()->session()->flash('alert-info', 'Deleted Successful');
+
 return to_route('todos.index');
 }
 
