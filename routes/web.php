@@ -37,7 +37,7 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-
+Route::middleware('auth')->group(function () {
 Route::prefix('todos')->as('todos.')->controller(TodoController::class)->group(function(){
     Route::get('index', 'index')->name('index'); 
     Route::get('create', 'create')->name('create'); 
@@ -46,4 +46,5 @@ Route::prefix('todos')->as('todos.')->controller(TodoController::class)->group(f
     Route::get('{id}/edit', 'edit')->name('edit'); 
     Route::put('update', 'update')->name('update');
     Route::delete('destroy', 'destroy')->name('destroy');
+});
 });

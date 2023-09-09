@@ -28,8 +28,8 @@
                         </div>
                     <div class="mb-3">
                     <label class="form-label">Description</label>
-                    <textarea name="description" class="form-control" cols="5" rows="5">
-                    {{ $todo->description }}
+                    <textarea name="description" class="form-control" cols="5" rows="5" value="{{ $todo->description }}">{{ $todo->description }}
+
                     </textarea>
                     
                 </div>

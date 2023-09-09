@@ -10,6 +10,7 @@
 .inner
 {
     display: inline-block;
+    margin: 5px;
 }
 </style>
 @endsection
@@ -35,13 +36,14 @@
                 </div>
                 @endif
 
-                <a class="btn btn-sm btn-info" href="{{ route('todos.create') }}">Create To-do</a>
-                
                 @if (Session::has('alert-info'))
                 <div class="alert alert-info" role="alert">
                 {{ Session::get('alert-info') }}
                 </div>
                 @endif
+
+                <a class="btn btn-sm btn-info" href="{{ route('todos.create') }}">Create To-do</a>
+                
 
                 @if (count($todos) > 0)
                 <div class="table-responsive">
@@ -74,6 +76,8 @@
                              @method('DELETE')
                                 <input type="hidden" name="todo_id" value="{{ $todo->id }}">
                                 <input type="submit" class="btn btn-sm btn-danger" value="Delete">
+                                
+    
                             </form>
                             </td>
                         </tr>
@@ -81,6 +85,7 @@
                     
                 </tbody>
                 </table>
+                {{ $todos->links('pagination::bootstrap-4') }}
                 @else
                 <h4>No to-dos are created yet</h4>
                 @endif
